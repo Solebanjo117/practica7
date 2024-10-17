@@ -45,13 +45,13 @@
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId">
                                     <a class="dropdown-item" href="#">Periodos </a>
-                                    <a class="dropdown-item" href="#">Plazas </a>
-                                    <a class="dropdown-item" href="#">Puestos  </a>
+                                    <a class="dropdown-item" href="{{route('plazas.index')}}">Plazas </a>
+                                    <a class="dropdown-item" href="{{route('puestos.index')}}">Puestos  </a>
                                     <a class="dropdown-item" href="#">Personal  </a>
                                     <a class="dropdown-item" href="#">Deptos </a>
                                     <a class="dropdown-item" href="#">Carreras</a>
                                     <a class="dropdown-item" href="#">Materias </a>
-                                    <a class="dropdown-item" href="#">Alumnos </a>
+                                    <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos </a>
                                 <a class="dropdown-item" href="#">Retículas</a>
                                 </div>
                             </li>
@@ -68,7 +68,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
                                         <a class="dropdown-item" href="#">Docentes</a>
-                                        <a class="dropdown-item" href="#">Alumnos</a>
+                                        <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos</a>
                                     </div>
                                 </div>
                             </li>
@@ -139,9 +139,9 @@
         </div>
         <div class="row-4"  >
         <center>
-        <div class="col-4" >
+        <div class="col-8" >
            
-        <h2>Inicio</h2>    
+        @yield('contenido')  
     </center>
     </div>
 </div>
