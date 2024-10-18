@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('personal_plazas', function (Blueprint $table) {
-            $table->id();
+            $table->id('idPlazaPersonal');
+            $table->integer('tipoNombramiento')->nullable();
+            $table->string('idPlaza',25);
+            $table->foreign('idPlaza')->references('idPlaza')->on('plazas');
+            $table->string('RFC',13);
+            $table->foreign('RFC')->references('RFC')->on('personals');
             $table->timestamps();
         });
     }

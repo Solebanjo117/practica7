@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->id();
+            $table->id('idHorario');
+            $table->string('noTrabajador',4);
+            $table->foreign('noTrabajador')->references('noTrabajador')->on('personals');
+            $table->string('idPeriodo',5);
+            $table->foreign('idPeriodo')->references('idPeriodo')->on('periodos');
+            $table->date('fecha');
             $table->timestamps();
         });
     }

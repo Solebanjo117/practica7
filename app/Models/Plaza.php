@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plaza extends Model
 {
@@ -15,4 +16,9 @@ class Plaza extends Model
     protected $primaryKey = 'idPlaza';
     public $incrementing = false; 
     protected $fillable = ['idPlaza','nombrePlaza'];
+    public function personals():BelongsToMany{
+        return $this->belongsToMany(Personal::class,'personal_plazas','idPlaza','RFC')
+        ->withPivot('tipoNombramiento')
+        ->withTimestamps();
+    }
 }

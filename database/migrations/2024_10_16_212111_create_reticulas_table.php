@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reticulas', function (Blueprint $table) {
-            $table->id();
+            $table->string('idReticula',15)->primary();
+            $table->string('descripcion',250)->nullable();
+            $table->date('fechaEnVigor')->nullable();
+            $table->string('idCarrera',15);
+            $table->foreign('idCarrera')->references('idCarrera')->on('carreras');
             $table->timestamps();
         });
     }

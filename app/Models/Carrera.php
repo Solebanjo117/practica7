@@ -21,4 +21,7 @@ class Carrera extends Model
     public function alumnos():HasMany{
         return $this->hasMany(Alumno::class,'idCarrera');
     }
+    public function reticulas():HasMany{
+        return $this->hasMany(Reticula::class,'idCarrera');
+    }
 }

@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('periodos', function (Blueprint $table) {
-            $table->id();
+            $table->string('idPeriodo',5)->primary();
+            $table->string('periodo',100)->nullable();
+            $table->string('descCorta',10)->nullable();
+            $table->date('fechaIni');
+            $table->date('fechaFin');
             $table->timestamps();
         });
     }

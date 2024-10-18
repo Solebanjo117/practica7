@@ -9,4 +9,7 @@ class PersonalPlaza extends Model
 {
     /** @use HasFactory<\Database\Factories\PersonalPlazaFactory> */
     use HasFactory;
+    protected $fillable = 
+    ['tipoNombramiento','idPlaza','RFC'];
+    protected $primaryKey = 'idPlazaPersonal';
 }
