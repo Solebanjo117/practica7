@@ -18,7 +18,7 @@ class DeptoFactory extends Factory
     {
         return [
             'idDepto'=>fake()->unique()->bothify('###??????'),
-            'nombreDepto'=>fake()->unique()->name(),
+            'nombreDepto'=>fake()->unique()->jobTitle(),
             'nombreMediano'=> fake()->text(12),
 
         ];

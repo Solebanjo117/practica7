@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
+use App\Models\Depto;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,6 +10,12 @@ Route::get('/', function () {
 Route::resource('alumnos',AlumnoController::class);
 Route::resource('plazas',PlazaController::class);
 Route::resource('puestos',PuestoController::class);
+Route::resource('deptos',DeptoController::class);
+Route::resource('carreras',CarreraController::class);
+Route::resource('reticulas',ReticulaController::class);
+Route::resource('materias',MateriaController::class);
+Route::resource('periodos',PeriodoController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

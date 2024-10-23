@@ -44,4 +44,11 @@ class PlazaController extends Controller
         return redirect()->route('plazas.index')->with('status',
         'La plaza se ha eliminado correctamente');
      }
+     public function show($plaza){
+        $datos = Plaza::where('nombrePlaza','like','%'.$plaza.'%')->paginate(5);
+        $columnas = Schema::getColumnListing("plazas");
+        $columnas_omitidas = ['created_at', 'updated_at'];
+        $ruta_base='plazas';
+        return view("plazas.index",compact('datos','columnas','columnas_omitidas','ruta_base'));
+    }
 }

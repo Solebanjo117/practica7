@@ -17,7 +17,11 @@ class MateriaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+           'idMateria'=>fake()->unique()->bothify('???-?#?#'),
+           'nombreMateria'=>fake()->jobTitle(),
+           'nivel'=>fake()->randomElement(['I','D','E']),
+            'nombreMediano'=>fake()->name(),
+            'modalidad'=>fake()->randomElement(['L','P'])
         ];
     }
 }

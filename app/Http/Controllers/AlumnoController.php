@@ -34,10 +34,11 @@ class AlumnoController extends Controller
         return redirect()->route('alumnos.index')->with('status','El alumno se ha insertado correctamente');
     }
     public function edit(Alumno $alumno){
-        $datos = Alumno::join('carreras','alumnos.idCarrera','=','carreras.idCarrera')->paginate(5);
-        $columnas = array_merge(Schema::getColumnListing("alumnos"),Schema::getColumnListing("carreras"));
-        $columnas_omitidas = ['created_at', 'updated_at','sexo','idCarrera',
-        'nombreMediano','nombreCorto','idDepto'];
+        $datos = Alumno::join('carreras','alumnos.idCarrera','=','carreras.idCarrera')
+        ->select('alumnos.*','carreras.nombreCarrera as Carrera')->paginate(5);
+          $columnas = array_merge(Schema::getColumnListing("alumnos"),['Carrera']);
+          $columnas_omitidas = ['created_at', 'updated_at','sexo','idCarrera',
+          'nombreMediano','nombreCorto','idDepto'];
         $dato = $alumno; //dato a colocar en formulario
         $carreras = [Carrera::find($alumno->idCarrera)];
         $ruta_base='alumnos'; //ruta dinamica
@@ -46,11 +47,21 @@ class AlumnoController extends Controller
     public function update(Request $request, Alumno $alumno)
     {
         $alumno->update($request->all());
-        return redirect()->route('alumnos.index')->with('status','El puesto se ha actualizado');
+        return redirect()->route('alumnos.index')->with('status','El Alumno se ha actualizado');
     }
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
-        return redirect()->route('alumnos.index')->with('status','El puesto se ha eliminado');
+        return redirect()->route('alumnos.index')->with('status','El Alumno se ha eliminado');
+    }
+    public function show($alumno){
+        $datos = Alumno::where('nombreAlumno','like','%'.$alumno.'%')->
+        join('carreras','alumnos.idCarrera','=','carreras.idCarrera')
+        ->select('alumnos.*','carreras.nombreCarrera as Carrera')->paginate(5);
+        $columnas = array_merge(Schema::getColumnListing("alumnos"),['Carrera']);
+        $columnas_omitidas = ['created_at', 'updated_at','sexo','idCarrera',
+        'nombreMediano','nombreCorto','idDepto'];
+        $ruta_base='alumnos';
+        return view("alumnos.index",compact('datos','columnas','columnas_omitidas','ruta_base'));
     }
 }

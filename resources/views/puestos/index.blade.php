@@ -1,4 +1,4 @@
-@extends('dashboard');
+@extends('dashboard')
 @section('contenido')
 @session('status')
 <div class="alert alert-primary" role="alert">

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Periodo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class PeriodoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+            Periodo::factory(35)->create();
     }
 }

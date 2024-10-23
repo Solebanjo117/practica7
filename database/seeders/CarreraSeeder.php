@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Alumno;
 use App\Models\Carrera;
 use App\Models\Depto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,6 +16,8 @@ class CarreraSeeder extends Seeder
     public function run(): void
     {
         
-        Carrera::factory(15)->create();
+        Carrera::factory(5)->has(
+            Alumno::factory(3)
+        )->create();
     }
 }

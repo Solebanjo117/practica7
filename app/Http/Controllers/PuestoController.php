@@ -46,9 +46,13 @@ class PuestoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Puesto $puesto)
+    public function show($puesto)
     {
-        //
+        $datos = Puesto::where('nombre','like','%'.$puesto.'%')->paginate(5);
+        $columnas = Schema::getColumnListing("puestos");
+        $columnas_omitidas = ['created_at', 'updated_at'];
+        $ruta_base='puestos';
+        return view("puestos.index",compact('datos','columnas','columnas_omitidas','ruta_base'));
     }
 
     /**

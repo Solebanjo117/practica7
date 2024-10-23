@@ -17,7 +17,9 @@ class ReticulaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'idReticula' =>fake()->unique()->bothify(str_repeat('?',12)),
+            'descripcion' =>fake()->jobTitle(),
+            'fechaEnVigor'=>fake()->date('Y-m-d'),
         ];
     }
 }

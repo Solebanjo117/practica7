@@ -20,7 +20,6 @@ class CarreraFactory extends Factory
         return [
             'idCarrera'=>fake()->unique()->bothify('###????#?'),
             'nombreCarrera'=>fake()->word(),
-            
         ];
     }
 }

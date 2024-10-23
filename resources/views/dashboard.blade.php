@@ -44,15 +44,15 @@
                                     >Catalogos </a
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                    <a class="dropdown-item" href="#">Periodos </a>
+                                    <a class="dropdown-item" href="{{route('periodos.index')}}">Periodos </a>
                                     <a class="dropdown-item" href="{{route('plazas.index')}}">Plazas </a>
                                     <a class="dropdown-item" href="{{route('puestos.index')}}">Puestos  </a>
                                     <a class="dropdown-item" href="#">Personal  </a>
-                                    <a class="dropdown-item" href="#">Deptos </a>
-                                    <a class="dropdown-item" href="#">Carreras</a>
-                                    <a class="dropdown-item" href="#">Materias </a>
+                                    <a class="dropdown-item" href="{{route('deptos.index')}}">Deptos </a>
+                                    <a class="dropdown-item" href="{{route('carreras.index')}}">Carreras</a>
+                                    <a class="dropdown-item" href="{{route('materias.index')}}">Materias </a>
                                     <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos </a>
-                                <a class="dropdown-item" href="#">Retículas</a>
+                                <a class="dropdown-item" href="{{route('reticulas.index')}}">Retículas</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -116,7 +116,19 @@
                                 </select>
                            
                            </li>
-                            
+                           @if (Route::currentRouteName()!= 'dashboard')
+                           <li>
+                            <div class="input-group rounded">
+                                <form   id="searchForm" method="get">
+                                    <input type="search" name="id" id="searchInput" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                    <button type="submit" hidden>Buscar</button>
+                                </form>
+                                <span class="input-group-text border-0" id="search-addon">
+                                  <i class="fas fa-search"></i>
+                                </span>
+                              </div>
+                        </li>
+                           @endif
                             <li class="nav-item">
                                <form action="{{route('logout')}}" method="post">
                                 @csrf
@@ -160,4 +172,18 @@
     </div>
     
 </body>
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita el envío automático del formulario
+
+        // Obtiene el valor del input
+        const id = document.getElementById('searchInput').value;
+        if (id) {
+          var baseRoute ="{{explode('.', Route::currentRouteName())[0]}}";
+            // Redirige a la URL dinámica de la ruta 'reticulas.show' con el ID
+            const url = `/${baseRoute}/${id}`;
+            window.location.href = url;
+        }
+    });
+</script>
 </html>
