@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('idPeriodo',5)->primary();
             $table->string('periodo',100)->nullable();
             $table->string('descCorta',10)->nullable();
-            $table->date('fechaIni');
-            $table->date('fechaFin');
+            $table->date('fechaIni')->unique();
+            $table->date('fechaFin')->unique();
             $table->timestamps();
         });
     }

@@ -15,10 +15,16 @@ Route::resource('carreras',CarreraController::class);
 Route::resource('reticulas',ReticulaController::class);
 Route::resource('materias',MateriaController::class);
 Route::resource('periodos',PeriodoController::class);
-
+Route::resource('materiasA',MateriaAbiertaController::class);
+Route::resource('personals',PersonalController::class);
+Route::resource('personalplazas',PersonalPlazaController::class);
+Route::resource('edificios',EdificioController::class);
+Route::resource('lugares',LugarController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

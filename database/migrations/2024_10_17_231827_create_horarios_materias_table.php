@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('horarios_materias', function (Blueprint $table) {
             $table->id('idHorarioMateria');
             $table->string('grupos',50);

@@ -16,8 +16,9 @@ return new class extends Migration
             $table->integer('tipoNombramiento')->nullable();
             $table->string('idPlaza',25);
             $table->foreign('idPlaza')->references('idPlaza')->on('plazas');
-            $table->string('RFC',13);
-            $table->foreign('RFC')->references('RFC')->on('personals');
+            $table->string('idPersonal',13);
+            $table->foreign('idPersonal')->references('noTrabajador')->on('personals');
+            $table->unique(['idPlaza','idPersonal']);
             $table->timestamps();
         });
     }

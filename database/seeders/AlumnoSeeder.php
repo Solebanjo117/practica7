@@ -15,10 +15,18 @@ class AlumnoSeeder extends Seeder
      */
     public function run(): void
     {
-        Depto::factory(3)->has(
-            Carrera::factory(5)->has(
-                Alumno::factory(3)
-            )
-        )->create();
+        $carreras = Carrera::take(4)->get();
+        
+        foreach ($carreras as $carrera) {
+            foreach (range(1, 5) as $i) {
+                Alumno::create([
+                    'nombreAlumno' => "Alumno {$carrera->nombreCarrera} $i",
+                    'apellidoPaterno'=>fake()->lastName(),
+                    'sexo'=>fake()->randomElement(['H','M']),
+                    'noctrl'=>fake()->randomNumber(9),
+                    'idCarrera' => $carrera->idCarrera,
+                ]);
+            }
+        }
     }
 }

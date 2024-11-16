@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('personals', function (Blueprint $table) {
             $table->string('noTrabajador',4)->primary();
-            $table->string('RFC',13)->index();
+            $table->string('RFC',13);
             $table->string('nombres',50);
             $table->string('apellidoPaterno',50);
             $table->string('apellidoMaterno',50)->nullable();

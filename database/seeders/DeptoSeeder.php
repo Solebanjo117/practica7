@@ -14,8 +14,13 @@ class DeptoSeeder extends Seeder
      */
     public function run(): void
     {
-        Depto::factory()->has(
-            Carrera::factory(5)
-        )->count(5)->create();
+        $deptos = [
+            'Direccion', 'Subdireccion', 'ISC', 'IE', 'IM', 
+            'IME', 'CP', 'IGE', 'II', 'Ciencias Basicas'
+        ];
+
+        foreach ($deptos as $depto) {
+            Depto::create(['nombreDepto' => $depto,'idDepto'=>fake()->bothify('###???##')]);
+        }
     }
 }

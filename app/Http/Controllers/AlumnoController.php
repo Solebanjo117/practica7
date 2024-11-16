@@ -55,7 +55,7 @@ class AlumnoController extends Controller
         return redirect()->route('alumnos.index')->with('status','El Alumno se ha eliminado');
     }
     public function show($alumno){
-        $datos = Alumno::where('nombreAlumno','like','%'.$alumno.'%')->
+        $datos = Alumno::where('nombreAlumno','like','%'.$alumno.'%')->orWhere('noctrl','like','%'.$alumno.'%')->
         join('carreras','alumnos.idCarrera','=','carreras.idCarrera')
         ->select('alumnos.*','carreras.nombreCarrera as Carrera')->paginate(5);
         $columnas = array_merge(Schema::getColumnListing("alumnos"),['Carrera']);

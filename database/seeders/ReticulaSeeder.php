@@ -15,11 +15,15 @@ class ReticulaSeeder extends Seeder
      */
     public function run(): void
     {
-        Depto::factory(3)->has(
-            Carrera::factory(3)->has(
-            Reticula::factory(5)
-         )
-        )->create();
+        $carreras = Carrera::all();
+
+        foreach ($carreras as $carrera) {
+            Reticula::create([
+                'idReticula'=>fake()->bothify('###?##??#'),
+                'descripcion' => 'Retícula ' . $carrera->nombreCarrera,
+                'idCarrera' => $carrera->idCarrera
+            ]);
+        }
         
     }
 }
