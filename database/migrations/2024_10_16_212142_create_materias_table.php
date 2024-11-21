@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombreMediano',25)->nullable();
             $table->string('nombreCorto',10)->nullable();
             $table->string('modalidad',1)->nullable();
+            $table->integer('semestre');
             $table->string('idReticula',15);
             $table->foreign('idReticula')->references('idReticula')->on('reticulas');
             $table->timestamps();

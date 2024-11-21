@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('horario_maestro_grupos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('horario_maestro_id')->constrained()->onDelete('cascade');
-            $table->string('idGrupo');
+            $table->unsignedBigInteger('idGrupo');
             $table->foreign('idGrupo')->references('idGrupo')->on('grupos');
             $table->timestamps();
         });

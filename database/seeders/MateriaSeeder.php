@@ -25,7 +25,8 @@ class MateriaSeeder extends Seeder
                 Materia::create([
                     'idMateria'=>fake()->bothify('###-###'),
                     'nombreMateria' => "Materia ISC Semestre $semestre - $i",
-                    'idReticula' => $reticulaISC->idReticula
+                    'idReticula' => $reticulaISC->idReticula,
+                    'semestre'=> $semestre
                 ]);
             }
         }
@@ -36,7 +37,8 @@ class MateriaSeeder extends Seeder
                 Materia::create([
                     'nombreMateria' => "Materia Industrial Semestre $semestre - $i",
                     'idMateria'=>fake()->bothify('###-###'),
-                    'idReticula' => $reticulaIndustrial->idReticula
+                    'idReticula' => $reticulaIndustrial->idReticula,
+                    'semestre'=> $semestre
                 ]);
             }
         }

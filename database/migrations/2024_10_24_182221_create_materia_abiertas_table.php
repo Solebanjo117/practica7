@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('idMateria')->references('idMateria')->on('materias');
             $table->string('idPeriodo',5);
             $table->foreign('idPeriodo')->references('idPeriodo')->on('periodos');
+            $table->string('idCarrera',15);
+            $table->foreign('idCarrera')->references('idCarrera')->on('carreras');
             $table->timestamps();
         });
     }

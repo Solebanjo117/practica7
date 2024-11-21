@@ -1,62 +1,66 @@
 @extends('dashboard')
 @section('contenido')
-    <div class="row">
-        <h3>Apertura de materias</h3>
+<div class="row">
+    <div class="col-10">
+        <h3>Apertuda de Materias</h3>
     </div>
-    <form action="{{route('materiasA.store')}}">
-        <div class="col">
-            <label for="">
-                Periodos
-                <select name="idPeriodo" id="idPeriodo">
-                    @foreach ($periodos as $periodo)
-                    <option value="{{$periodo->idPeriodo}}">{{$periodo->periodo}}</option>
-                    @endforeach
-                </select>
-            </label>
-            <br>
-           <label for="">Carreras
-            <select name="idCarrera" id="idCarrera" onchange="this.form.submit()">
-                @foreach ($carreras as $carrera)
-                <option value="{{ $carrera->idCarrera }}" {{ old('idCarrera') == $carrera->idCarrera ? 'selected' : '' }}>{{ $carrera->nombreCarrera }}</option>
-     
+    <div class="col-2">
+        {{-- {!!dd(request()->all())!!} --}}
+        {{session("periodo_id")}}
+        {{session('carrera_id')}}
+        <form action="{{route('materiasA.index')}}" method="get">
+            <select name="idPeriodo" id="idperiodo" onchange="this.form.submit()">
+                <option value="-1">Seleccione el periodo</option>
+                @foreach ($periodos as $periodo )
+                <option value="{{$periodo->idPeriodo}}" @if($periodo->idPeriodo == session('periodo_id'))
+                    {{ "selected" }}
+                    @endif
+                    >{{$periodo->idPeriodo}} {{ $periodo->periodo }}</option>
+                @endforeach
+
+            </select><br>
+            <select name="idCarrera" id="idcarrera" onchange="this.form.submit()">
+                <option value="-1">Seleccione la carrera</option>
+                @foreach ($carreras as $carr )
+                <option value="{{$carr->idCarrera}}" @if($carr->idCarrera == session('carrera_id'))
+                    {{ "selected" }}
+                    @endif
+                    >{{$carr->idCarrera}} {{$carr->nombreCarrera }}</option>
                 @endforeach
             </select>
-           </label>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button"  >
-                    Sem1
-                    </button><br>
-                    <input type="checkbox" name="m1" id="m1" >Materia1 <br>
-                    <input type="checkbox" name="m2" id="m2">Materia2 <br>
-                    <input type="checkbox" name="m3" id="m3">Materia3 <br>
-                    <input type="checkbox" name="m4" id="m4">Materia4 <br>
-    
-    
-            </div>
-            <div class="col">
-                <button type="button"  >
-                    Sem2
-                    </button><br>
-                    <input type="checkbox" name="m1" id="m1">Materia1 <br>
-                    <input type="checkbox" name="m2" id="m2">Materia2 <br>
-                    <input type="checkbox" name="m3" id="m3">Materia3 <br>
-                    <input type="checkbox" name="m4" id="m4">Materia4 <br>
-    
-    
-            </div>
-            <div class="col">
-                <button type="button"  >
-                    Sem3
-                    </button><br>
-                    <input type="checkbox" name="m1" id="m1">Materia1 <br>
-                    <input type="checkbox" name="m2" id="m2">Materia2 <br>
-                    <input type="checkbox" name="m3" id="m3">Materia3 <br>
-                    <input type="checkbox" name="m4" id="m4">Materia4 <br>
-    
-    
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form action="{{route('materiasA.store')}}" method="post">
+            @csrf
+            <input type="hidden" name="eliminar" id="eliminar" value="NOELIMINAR">
+            <button>Sem 1</button><br>
+            @if($carrera->count() and session('periodo_id') != "-1")
+            @foreach ( $carrera[0]->reticulas[0]->materias as $materia )
+           
+            <input type="checkbox" 
+                    name="m{{$materia->idMateria}}" 
+                    value="{{$materia->idMateria}}" 
+                    onchange="enviar(this)"
+                    @if ( $ma->firstWhere('idMateria',$materia['idMateria']))
+                        {{"checked"}}
+                    @endif>
+            {{$materia->idMateria}}
+            {{$materia->nombreMateria}}<br>
+            @endforeach
+            @endif
+        </form>
+    </div>
+</div>
+<script>
+
+    function enviar(chbox){
+        if (!chbox.checked){
+            document.getElementById('eliminar').value = chbox.value;
+        }
+        chbox.form.submit();    
+        }
+</script>
 @endsection

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('grupo_horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('idGrupo');
+            $table->unsignedBigInteger('idGrupo');
             $table->foreign('idGrupo')->references('idGrupo')->on('grupos');
             $table->unsignedBigInteger('idLugar');
             $table->foreign('idLugar')->references('id')->on('lugars');

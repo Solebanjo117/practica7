@@ -12,7 +12,7 @@ class Materia extends Model
     /** @use HasFactory<\Database\Factories\MateriaFactory> */
     use HasFactory;
     protected $fillable = ['idMateria','nombreMateria','nivel'
-    ,'nombreMediano','nombreCorto','modalidad','idReticula'];
+    ,'nombreMediano','nombreCorto','modalidad','idReticula','semestre'];
     protected $casts = ['idMateria'=>'string'];
     public $incrementing = false;
     protected $primaryKey = 'idMateria';

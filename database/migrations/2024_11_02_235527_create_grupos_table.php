@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('grupos', function (Blueprint $table) {
-            $table->string('idGrupo')->primary();
+            $table->id('idGrupo');
             $table->string('nombreGrupo');
             $table->string('descripcionGrupo');
             $table->integer('maxAlumnos');
             $table->string('idPeriodo');
             $table->foreign('idPeriodo')->references('idPeriodo')->on('periodos');
-            $table->string('idMateria');
+            $table->string('idMateria')->nullable();
             $table->foreign('idMateria')->references('idMateria')->on('materias');
-            $table->string('noTrabajador');
+            $table->string('noTrabajador')->nullable();
             $table->foreign('noTrabajador')->references('noTrabajador')->on('personals');
             $table->timestamps();
         });
