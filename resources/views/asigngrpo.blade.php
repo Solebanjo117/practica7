@@ -1,6 +1,12 @@
 @extends('dashboard')
 @section('contenido')
+<style>
+    li{
+        list-style: none;
+    }
+</style>
 <h3>Asignacion grupo</h3>
+
 <div class="container">
    <form action="{{route('grupos.store')}}" method="post">
     @csrf
@@ -94,9 +100,13 @@
                @endforeach
 
         </select>
-        <input type="radio" name="ing" id="">Ing chaves soto
-        <input type="radio" name="flor" id="">Ing Flor maria
-        <input type="radio" name="aqui" id="">Ing Aquiles
+        @session('depto')
+                    @foreach (session('depto')->personals as $item)
+                        <li><input type="radio" name="1" id="" value="{{$item->noTrabajador}}">{{$item->nombres}}</li>
+                    @endforeach
+                @endsession
+        
+        
         </div>
         <div class="col">
             <select name="" id="edificio" onchange="cambiar()">
@@ -105,9 +115,11 @@
                     value="{{$item->id}}">{{$item->nombre}}</option>
                 @endforeach
             </select>
-            <input type="radio" name="ing" id="">Salon k1
-        <input type="radio" name="flor" id="">salon k2
-        <input type="radio" name="aqui" id="">salon k3
+            @session('depto')
+                    @foreach (session('edificio')->lugares as $item)
+                        <li><input type="radio" name="1" id="" value="{{$item->id}}"> {{" ".$item->nombre}}</li>
+                    @endforeach
+                @endsession
         </div>
         <div class="col-4">
             

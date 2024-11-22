@@ -22,6 +22,7 @@ Route::resource('edificios',EdificioController::class);
 Route::resource('lugares',LugarController::class);
 Route::resource('grupos',GrupoController::class);
 Route::resource('asignarGrupo',GrupoHorarioController::class);
+Route::resource('vista',HorarioAlumnoController::class);
 Route::get('/asignarGrupo/{param1}/{param2}/{param3}', [GrupoHorarioController::class, 'show'])->name('asignarGrupo.show');
 Route::get('/dashboard', function () {
     return view('dashboard');

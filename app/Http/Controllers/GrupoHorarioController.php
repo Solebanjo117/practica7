@@ -48,8 +48,8 @@ class GrupoHorarioController extends Controller
     public function show($grupoHorario,$id2,$id3)
     {
         session()->put('semestre', $grupoHorario);
-        session()->put('depto', Depto::where('idDepto',$id2)->first());
-        session()->put('edificio', Edificio::where('id',$id3)->first());
+        session()->put('depto', Depto::where('idDepto',$id2)->with('personals')->first());
+        session()->put('edificio', Edificio::where('id',$id3)->with('lugares')->first());
         session()->put('materias',MateriaAbierta::whereHas('materia', function($q) use($grupoHorario){
             $q->where('semestre', $grupoHorario);
         })->get());
