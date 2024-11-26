@@ -10,6 +10,18 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Alta de Horario</h1>
 
+        <!-- Buscador de Alumnos -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <label for="buscador-alumno" class="form-label"><strong>Buscar Alumno por Número de Control</strong></label>
+                <div class="input-group">
+                    <input type="text" id="buscador-alumno" class="form-control" placeholder="Ingrese el número de control">
+                    <button class="btn btn-secondary" type="button">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario -->
         <form action="#" method="POST">
             <!-- Simulación de protección CSRF -->
             <input type="hidden" name="_token" value="fictitious_csrf_token">
@@ -63,4 +75,6 @@
         </form>
     </div>
 
-    <script src="https://cdn.jsde
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

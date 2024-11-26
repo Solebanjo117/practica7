@@ -29,6 +29,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/horarioAlumn', function () {
+    return view('horarioAlumn');
+})->name('horarioAlumn');
 
 
 Route::middleware('auth')->group(function () {
