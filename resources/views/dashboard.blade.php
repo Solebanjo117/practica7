@@ -56,8 +56,10 @@
                                 <a class="dropdown-item" href="{{route('personalplazas.index')}}">Personal Plazas</a>
                                 <a class="dropdown-item" href="{{route('edificios.index')}}">Edificios</a>
                                 <a class="dropdown-item" href="{{route('lugares.index')}}">Lugares</a>
-
+                                
                                 <a class="dropdown-item" href="{{route('materiasA.index')}}">Asignar Materia</a>
+                                <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar grupo</a>
+                                <a class="dropdown-item" href="{{route('horarioAlumn')}}">Asignar grupo</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
