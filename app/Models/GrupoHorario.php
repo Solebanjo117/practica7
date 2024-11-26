@@ -9,4 +9,5 @@ class GrupoHorario extends Model
 {
     /** @use HasFactory<\Database\Factories\GrupoHorarioFactory> */
     use HasFactory;
+    protected $fillable = ['idGrupo','idLugar','dia','hora'];
 }

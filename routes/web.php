@@ -23,7 +23,8 @@ Route::resource('lugares',LugarController::class);
 Route::resource('grupos',GrupoController::class);
 Route::resource('asignarGrupo',GrupoHorarioController::class);
 Route::resource('vista',HorarioAlumnoController::class);
-Route::get('/asignarGrupo/{param1}/{param2}/{param3}', [GrupoHorarioController::class, 'show'])->name('asignarGrupo.show');
+Route::get('api', [GrupoHorarioController::class, 'prueba'])->name('asignarGrupo.prueba');
+Route::get('/asignarGrupo/{param1}/{param2}/{param3}/{param4}', [GrupoHorarioController::class, 'show'])->name('asignarGrupo.show');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

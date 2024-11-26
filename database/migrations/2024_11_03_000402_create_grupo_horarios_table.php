@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('idGrupo')->references('idGrupo')->on('grupos');
             $table->unsignedBigInteger('idLugar');
             $table->foreign('idLugar')->references('id')->on('lugars');
-            $table->tinyInteger('dia');
+            $table->string('dia',1);
             $table->time('hora');
             $table->timestamps();
         });
