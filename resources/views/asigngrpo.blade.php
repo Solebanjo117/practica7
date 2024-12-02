@@ -71,16 +71,22 @@
             console.error('Error en la solicitud:', error);
         });
     }
-    function mostrarTabla(){
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        let idGrupo = document.getElementById('grupo').value;
-        fetch(`/grupos/${idGrupo}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                "X-CSRF-TOKEN": csrfToken
-            }
-        })
+    function mostrarTabla() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    let tabla = document.getElementById('tabla');
+    const lugarActual = document.querySelector('input[name="radiolugar"]:checked')?.value; // ID del lugar seleccionado
+    let radiopersonal = document.querySelector('input[name="radiopersonal"]:checked');
+    let radiolugar = document.querySelector('input[name="radiolugar"]:checked');
+    let radiomateria = document.querySelector('input[name="radiomateria"]:checked');
+    let idGrupo = document.getElementById('grupo').value;
+
+    fetch(`/grupos/${idGrupo}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRF-TOKEN": csrfToken
+        }
+    })
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Error al obtener horarios: " + response.status);
@@ -89,30 +95,35 @@
         })
         .then((horarios) => {
             const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-            const valoresGenerados = horarios.mensaje.map((element) => {
-    return element.hora[0] == 0 ? element.dia + element.hora[1] : element.dia + element.hora[0] + element.hora[1];
-});
-const checkboxesCoincidentes = checkboxes.filter(checkbox => valoresGenerados.includes(checkbox.value));
-checkboxesCoincidentes.forEach(checkbox => {
-    checkbox.checked = true;
-});
-            // Limpiar la tabla antes de llenarla
-         
+
+            // Generar valores del formato "DíaHora" y aplicar lógica
+            horarios.mensaje.forEach((horario) => {
+                const valorHorario = horario.hora[0] == 0 ? horario.dia + horario.hora[1] : horario.dia + horario.hora[0] + horario.hora[1];
+
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.value === valorHorario) {
+                        // Habilitar/deshabilitar el checkbox según el lugar
+                        checkbox.disabled = horario.idLugar != lugarActual;
+
+                        // Si es habilitado y coincide, lo marcamos como seleccionado
+                        if (!checkbox.disabled) {
+                            checkbox.checked = true;
+                        }
+                    }
+                });
+            });
         })
         .catch((error) => {
             console.error("Error:", error);
         });
-    
-        let tabla = document.getElementById('tabla');
-        let radiopersonal = document.querySelector('input[name="radiopersonal"]:checked');
-        let radiolugar = document.querySelector('input[name="radiolugar"]:checked');
-        let radiomateria = document.querySelector('input[name="radiomateria"]:checked');
-        if (radiopersonal && radiolugar && radiomateria){
-            tabla.style.visibility='visible';
-        }else{
-            tabla.style.visibility='hidden';
-        }
+
+    if (radiopersonal && radiolugar && radiomateria) {
+        tabla.style.visibility = 'visible';
+    } else {
+        tabla.style.visibility = 'hidden';
     }
+}
+
     function cambiarMaestro(){
         let id = document.querySelector('input[name="radiopersonal"]:checked').value;
         let idGrupo = document.getElementById('grupo').value;
