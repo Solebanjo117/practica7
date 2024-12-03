@@ -72,6 +72,8 @@
         });
     }
     function mostrarTabla() {
+        
+
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let tabla = document.getElementById('tabla');
     const lugarActual = document.querySelector('input[name="radiolugar"]:checked')?.value; // ID del lugar seleccionado
@@ -79,7 +81,6 @@
     let radiolugar = document.querySelector('input[name="radiolugar"]:checked');
     let radiomateria = document.querySelector('input[name="radiomateria"]:checked');
     let idGrupo = document.getElementById('grupo').value;
-
     fetch(`/grupos/${lugarActual}`, {
         method: "GET",
         headers: {

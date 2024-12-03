@@ -74,7 +74,7 @@
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
-                                        <a class="dropdown-item" href="#">Docentes</a>
+                                        <a class="dropdown-item" href="{{route('docentes.index')}}">Docentes</a>
                                         <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos</a>
                                     </div>
                                 </div>

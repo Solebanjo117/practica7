@@ -24,4 +24,8 @@ class JsonController extends Controller
     public function alumnos(){
         return DB::table('alumnos')->get();
     }
+    public function gruposHorarios($id){
+        $idGrupo= DB::table('grupos')->where('nombreGrupo',$id)->first()->idGrupo;
+        return DB::table('grupo_horarios')->where('idGrupo',$idGrupo)->get();
+    }
 }

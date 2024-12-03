@@ -12,7 +12,7 @@ class HorarioMaestroController extends Controller
      */
     public function index()
     {
-        //
+       return view('horarioDocente');
     }
 
     /**

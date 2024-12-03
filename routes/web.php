@@ -24,6 +24,7 @@ Route::resource('grupos',GrupoController::class);
 Route::resource('asignarGrupo',GrupoHorarioController::class);
 Route::resource('vista',HorarioAlumnoController::class);
 Route::resource('index21327',Grupo21327Controller::class);
+Route::resource('docentes',HorarioMaestroController::class);
 Route::get('api', [GrupoHorarioController::class, 'prueba'])->name('asignarGrupo.prueba');
 Route::get('/asignarGrupo/{param1}/{param2}/{param3}/{param4}', [GrupoHorarioController::class, 'show'])->name('asignarGrupo.show');
 Route::get('/dashboard', function () {

@@ -11,3 +11,4 @@ Route::get('/periodos',[JsonController::class,'periodos']);
 Route::get('/carreras',[JsonController::class,'carreras']);
 Route::get('/semestres',[JsonController::class,'semestres']);
 Route::get('/alumnos',[JsonController::class,'alumnos']);
+Route::get('/gruposHorarios/{id}',[JsonController::class,'gruposHorarios']);
