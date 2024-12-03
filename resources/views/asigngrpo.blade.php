@@ -80,7 +80,7 @@
     let radiomateria = document.querySelector('input[name="radiomateria"]:checked');
     let idGrupo = document.getElementById('grupo').value;
 
-    fetch(`/grupos/${idGrupo}`, {
+    fetch(`/grupos/${lugarActual}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -94,25 +94,30 @@
             return response.json();
         })
         .then((horarios) => {
-            const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+    checkboxes.forEach(checkbox => {
+           checkbox.checked=false;
+           checkbox.disabled=false;
+        });
+    // Generar valores del formato "DíaHora" y aplicar lógica
+    horarios.mensaje.forEach((horario) => {
+        
+        const valorHorario = horario.hora[0] == 0 ? horario.dia + horario.hora[1] : horario.dia + horario.hora[0] + horario.hora[1];
+ // Agregar atributos personalizados a los checkboxes
+        checkboxes.forEach(checkbox => {
+            if (checkbox.value === valorHorario) {
+                checkbox.checked = true;
+            }
+            if (checkbox.value === valorHorario && horario.grupo.nombreGrupo!= idGrupo) {
+                checkbox.disabled = true;
+            }
+        });
+    });
 
-            // Generar valores del formato "DíaHora" y aplicar lógica
-            horarios.mensaje.forEach((horario) => {
-                const valorHorario = horario.hora[0] == 0 ? horario.dia + horario.hora[1] : horario.dia + horario.hora[0] + horario.hora[1];
+    // Deshabilitar cualquier checkbox marcado que no esté en el grupo actual
+    
+})
 
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.value === valorHorario) {
-                        // Habilitar/deshabilitar el checkbox según el lugar
-                        checkbox.disabled = horario.idLugar != lugarActual;
-
-                        // Si es habilitado y coincide, lo marcamos como seleccionado
-                        if (!checkbox.disabled) {
-                            checkbox.checked = true;
-                        }
-                    }
-                });
-            });
-        })
         .catch((error) => {
             console.error("Error:", error);
         });

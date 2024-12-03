@@ -46,12 +46,11 @@ class GrupoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($grupo)
+    public function show($lugar)
     {
         
-        $grupox= Grupo::where('nombreGrupo',$grupo)->first();
        
-        $materias = GrupoHorario::where('idGrupo','=',$grupox->idGrupo)->get();
+        $materias = GrupoHorario::where('idLugar','=',$lugar)->with('grupo')->get();
         return response()->json(['mensaje'=>$materias]);
        
     }
