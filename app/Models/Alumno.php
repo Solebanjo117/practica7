@@ -18,4 +18,8 @@ class Alumno extends Model
     public function carrera():BelongsTo{
         return $this->belongsTo(Carrera::class,'idCarrera');
     }
+    public function archivos()
+    {
+        return $this->hasMany(Archivo::class, 'noctrl', 'noctrl');  // Relación con la tabla 'archivos'
+    }
 }

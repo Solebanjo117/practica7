@@ -28,4 +28,7 @@ class JsonController extends Controller
         $idGrupo= DB::table('grupos')->where('nombreGrupo',$id)->first()->idGrupo;
         return DB::table('grupo_horarios')->where('idGrupo',$idGrupo)->get();
     }
+    public function archivo($noctrl){
+        return DB::table('archivos')->where('noctrl',$noctrl)->get();
+    }
 }

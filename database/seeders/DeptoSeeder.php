@@ -22,5 +22,6 @@ class DeptoSeeder extends Seeder
         foreach ($deptos as $depto) {
             Depto::create(['nombreDepto' => $depto,'idDepto'=>fake()->bothify('###???##')]);
         }
+        
     }
 }

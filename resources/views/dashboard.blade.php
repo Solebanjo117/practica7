@@ -43,7 +43,9 @@
                                     aria-expanded="false"
                                     >Catalogos </a
                                 >
+                                @auth
                                 <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                    @if (Auth::user()->rol == 'Administrador')
                                     <a class="dropdown-item" href="{{route('periodos.index')}}">Periodos </a>
                                     <a class="dropdown-item" href="{{route('plazas.index')}}">Plazas </a>
                                     <a class="dropdown-item" href="{{route('puestos.index')}}">Puestos  </a>
@@ -57,10 +59,18 @@
                                 <a class="dropdown-item" href="{{route('edificios.index')}}">Edificios</a>
                                 <a class="dropdown-item" href="{{route('lugares.index')}}">Lugares</a>
                                 <a class="dropdown-item" href="{{route('horarioAlumn')}}">Alumno </a>
-                                <a class="dropdown-item" href="{{route('materiasA.index')}}">Asignar Materia</a>
-                                <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar grupo</a>
+                                @endif
+                                   @if (Auth::user()->rol == 'Maestro')
+                                       <a class="dropdown-item" href="{{route('materiasA.index')}}">Asignar Materia</a>
+                                        <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar grupo</a>
+
+                                       
+                                   @endif
+                                
+                               
                                 
                                 </div>
+                                @endauth
                             </li>
                             <li class="nav-item dropdown">
                                 <a
@@ -74,8 +84,16 @@
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
-                                        <a class="dropdown-item" href="{{route('docentes.index')}}">Docentes</a>
-                                        <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos</a>
+                                        @if (Auth::user()->rol == 'Maestro')
+                                             <a class="dropdown-item" href="{{route('docentes.index')}}">Docentes</a>
+                                      
+                                            
+                                        @else
+                                            <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos</a>
+                                        @endif
+                                         
+                                       
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -88,12 +106,12 @@
                                     data-bs-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false"
-                                    >Proyectos Individuales </a
+                                    >Extras </a
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
-                                    <a class="dropdown-item" href="#">Capacitación</a>
-                                    <a class="dropdown-item" href="#">AlumAsesorías Doc.</a>
+                                    <a class="dropdown-item" href="{{route('archivos.index')}}">Subir documentos</a>
+                                    <a class="dropdown-item" href="{{route('verArchivos')}}">Revisar documentos    </a>
                                     <a class="dropdown-item" href="#">Proyectos</a>
                                     <a class="dropdown-item" href="#">Material Didáctico </a>
                                     <a class="dropdown-item" href="#">Docencia e Inv.</a>
@@ -168,7 +186,7 @@
     <footer  >
         <center> <div class="col">
         @auth
-        <span> {{Auth::user()->email}} | {{Auth::user()->name}}
+        <span> {{Auth::user()->email}} | {{Auth::user()->name}} | {{Auth::user()->rol}}
 
             </span>  
         @endauth
