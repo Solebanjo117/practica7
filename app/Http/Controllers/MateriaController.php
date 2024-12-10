@@ -40,4 +40,11 @@ class MateriaController extends Controller
       $ruta_base ='materias';
       return view('materias.index', compact('datos', 'ruta_base'));
      }
+     public function update(
+      Request $request,
+      Materia $materia
+     ){
+      $materia->update($request->all());
+      return redirect()->route('materias.index')->with('status','La materia se ha actualizado');
+     }
 }

@@ -15,6 +15,9 @@
 }
 </style>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- Incluir jsPDF desde un CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
     <div class="container-fluid">
@@ -58,15 +61,14 @@
                                 <a class="dropdown-item" href="{{route('personalplazas.index')}}">Personal Plazas</a>
                                 <a class="dropdown-item" href="{{route('edificios.index')}}">Edificios</a>
                                 <a class="dropdown-item" href="{{route('lugares.index')}}">Lugares</a>
-                                <a class="dropdown-item" href="{{route('horarioAlumn')}}">Alumno </a>
                                 @endif
-                                   @if (Auth::user()->rol == 'Maestro')
+                                   @if (Auth::user()->rol == 'Administrador')
                                        <a class="dropdown-item" href="{{route('materiasA.index')}}">Asignar Materia</a>
                                         <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar grupo</a>
 
                                        
                                    @endif
-                                
+                                   
                                
                                 
                                 </div>
@@ -84,14 +86,17 @@
                                 >
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
+                                        @if (Auth::user()->rol == 'Administrador')
+                                             <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar Grupo</a>
+                                      @endif
                                         @if (Auth::user()->rol == 'Maestro')
                                              <a class="dropdown-item" href="{{route('docentes.index')}}">Docentes</a>
                                       
                                             
                                         @else
-                                            <a class="dropdown-item" href="{{route('alumnos.index')}}">Alumnos</a>
+                                            <a class="dropdown-item" href="{{route('horarioAlumno.index')}}">Alumno</a>
                                         @endif
-                                         
+                                        <a class="dropdown-item" href="{{route('alumnos.horario')}}">Ver horario alumno</a>
                                        
                                         
                                     </div>
@@ -112,7 +117,7 @@
                                     <div class="d-flex">
                                     <a class="dropdown-item" href="{{route('archivos.index')}}">Subir documentos</a>
                                     <a class="dropdown-item" href="{{route('verArchivos')}}">Revisar documentos    </a>
-                                    <a class="dropdown-item" href="#">Proyectos</a>
+                                    <a class="dropdown-item" href="{{route('materiasA.index')}}">Abrir materias</a>
                                     <a class="dropdown-item" href="#">Material Didáctico </a>
                                     <a class="dropdown-item" href="#">Docencia e Inv.</a>
                                     <a class="dropdown-item" href="#">Asesoría Proyectos Ext.</a>

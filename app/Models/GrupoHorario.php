@@ -14,4 +14,8 @@ class GrupoHorario extends Model
     public function grupo():BelongsTo{
         return $this->belongsTo(Grupo::class,'idGrupo');
     }
+    public function lugar()
+{
+    return $this->belongsTo(Lugar::class,'idGrupo');
+}
 }

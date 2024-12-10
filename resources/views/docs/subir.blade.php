@@ -46,7 +46,7 @@
 </div>
 <script>
 function verificar(){
-    var alumno_id = document.getElementById("alumno_id").value;
+  /*  var alumno_id = document.getElementById("alumno_id").value;
     let boton = document.getElementById("boton");
     axios.get(`api/archivos/${alumno_id}`).then(function (response) {
     if(response.data.length > 0){
@@ -58,7 +58,7 @@ function verificar(){
 })
 .catch(function (error) {
     console.error('Error:', error);
-});
+});*/
 }
 </script>
 @endsection

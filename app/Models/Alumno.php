@@ -18,8 +18,15 @@ class Alumno extends Model
     public function carrera():BelongsTo{
         return $this->belongsTo(Carrera::class,'idCarrera');
     }
+    public function grupos()
+    {
+        return $this->belongsToMany(Grupo::class, 'alumno_grupo', 'alumno_id', 'grupo_id');
+    }
     public function archivos()
     {
         return $this->hasMany(Archivo::class, 'noctrl', 'noctrl');  // Relación con la tabla 'archivos'
+    }
+    public function cita(){
+        return $this->hasMany(Cita::class,'alumno_id','noctrl');
     }
 }

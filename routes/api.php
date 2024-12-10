@@ -13,3 +13,8 @@ Route::get('/semestres',[JsonController::class,'semestres']);
 Route::get('/alumnos',[JsonController::class,'alumnos']);
 Route::get('/archivos/{noctrl}',[JsonController::class,'archivo']);
 Route::get('/gruposHorarios/{id}',[JsonController::class,'gruposHorarios']);
+Route::get('/materias-disponibles/{turno}/{alumno_id}', [JsonController::class, 'obtenerMaterias']);
+Route::post('/inscribir-alumno', [JsonController::class, 'inscribirAlumno']);
+Route::get('horario-alumno/{alumnoId}', [JsonController::class, 'getHorarioAlumno']);
+
+

@@ -37,6 +37,24 @@
                                     <div>
                                         <p><strong>{{ basename($archivo->identificacion_pdf) }} (Identificación)</strong></p>
                                         <a href="{{ asset('storage/' . $archivo->identificacion_pdf) }}" target="_blank" class="btn btn-primary">Ver / Descargar</a>
+                                        <br><br>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form action="{{route('archivos.update',$archivo->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="text" name="verificado" value="1" hidden id="" hidden><button type="submit" class="btn btn-success">Aceptar</button></form>
+                                                </div>
+                                                <div class="col">
+                                                    <form action="{{route('archivos.destroy',$archivo->id)}}" method="post" >
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Rechazar</button></form>
+                                        
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -61,5 +79,7 @@
             fileDetailsDiv.style.display = 'none'; // Ocultar el div
         }
     }
+
 </script>
+<br><br>
 @endsection

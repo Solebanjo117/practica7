@@ -47,6 +47,14 @@
           <option value="M">Mixta</option>
         </Select>
       </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Creditos</label>
+        <input type="number" name="creditos" id="" value="{{old('creditos',$dato->creditos)}}" max="8">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Semestre</label>
+        <input type="number" name="semestre" id="" value="{{old('semestre',$dato->semestre)}}" max="8">
+      </div>
 
 <label for="
 ">

@@ -64,4 +64,8 @@ class AlumnoController extends Controller
         $ruta_base='alumnos';
         return view("alumnos.index",compact('datos','columnas','columnas_omitidas','ruta_base'));
     }
+    public function mostrarVistaHorarios(){
+        $alumnos=Alumno::all();
+        return view('alumnos.verHorario',compact('alumnos'));
+    }
 }

@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Materia extends Model
 {
     /** @use HasFactory<\Database\Factories\MateriaFactory> */
     use HasFactory;
     protected $fillable = ['idMateria','nombreMateria','nivel'
-    ,'nombreMediano','nombreCorto','modalidad','idReticula','semestre'];
+    ,'nombreMediano','nombreCorto','modalidad','idReticula','semestre','creditos'];
     protected $casts = ['idMateria'=>'string'];
     public $incrementing = false;
     protected $primaryKey = 'idMateria';
@@ -24,4 +25,7 @@ class Materia extends Model
         ->withPivot('grupos','totalEstudiante','tipoLugar','lunes',
                     'martes','miercoles','jueves','viernes')->withTimestamps();
     }
+    function materiasAbiertas():HasMany{
+        return $this->hasMany(MateriaAbierta::class,'idMateria','idMateria');
+        }
 }

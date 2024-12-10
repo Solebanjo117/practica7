@@ -71,7 +71,8 @@ class ArchivoController extends Controller
      */
     public function update(Request $request, Archivo $archivo)
     {
-        //
+        $archivo->update(['verificado'=>$request->input('verificado')]);
+        return redirect()->route('verArchivos')->with('success', 'Archivo verificado correctamente.');
     }
 
     /**
@@ -79,15 +80,29 @@ class ArchivoController extends Controller
      */
     public function destroy(Archivo $archivo)
     {
-        //
+       $archivo->delete();
+     return redirect()->route('verArchivos')->with('success', 'Archivo eliminado correctamente.');
     }
     public function verArchivos()
     {
         // Buscar los archivos subidos por el alumno
-        $alumnosConArchivos = Alumno::whereHas('archivos') // Verifica si hay archivos relacionados con el alumno
+        $alumnosConArchivos = Alumno::whereHas('archivos', function ($query) {
+            $query->where('verificado', 0); // Filtra archivos donde 'verificado' sea 0
+        })
         ->paginate(5);
 
         // Pasar los archivos y el noctrl del alumno a la vista
         return view('docs.ver', compact('alumnosConArchivos'));
+    }
+    public function showAlumnArchivo($alumno)
+    {
+        $alumno = "%$alumno%";
+        $alumnosConArchivos =  $alumnosConArchivos = Alumno::whereHas('archivos', function ($query) {
+            $query->where('verificado', 0); // Filtra archivos donde 'verificado' sea 0
+        })->where('nombreAlumno','like',$alumno)
+        ->orWhere('noctrl',$alumno)->orWhere('apellidoPaterno','like',$alumno)
+        // Verifica si hay archivos relacionados con el alumno
+        ->paginate(5);
+        return view('docs.ver',compact('alumnosConArchivos'));
     }
 }
