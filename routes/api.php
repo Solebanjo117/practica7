@@ -16,7 +16,7 @@ Route::get('/gruposHorarios/{id}',[JsonController::class,'gruposHorarios']);
 Route::get('/materias-disponibles/{turno}/{alumno_id}', [JsonController::class, 'obtenerMaterias']);
 Route::post('/inscribir-alumno', [JsonController::class, 'inscribirAlumno']);
 Route::get('/horario-alumno/{alumnoId}', [JsonController::class, 'getHorarioAlumno']);
-Route::post('/insOrUpdtGrpo',[JsonController::class,'insOrUpdtGrpo']);
+Route::post('insOrUpdtGrpo',[JsonController::class,'insOrUpdtGrpo']);
 Route::get('/departamentos',[JsonController::class,'departamentos']);
 Route::get('/edificios',[JsonController::class,'edificios']);
 Route::get('/lugares',[JsonController::class,'lugares']);
