@@ -35,7 +35,7 @@ class JsonController extends Controller
         return $dato;
     }
     public function horarios(){
-        return DB::table('grupo_horarios')->get();
+        return GrupoHorario::with('grupo')->get();
     }
     public function insertHorario(Request $request){
        $horario= GrupoHorario::create(['idGrupo'=>$request->input('grupo'),
