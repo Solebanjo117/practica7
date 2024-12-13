@@ -162,7 +162,7 @@ public function insOrUpdtGrpo(Request $request){
         'idPeriodo'=>
         $request->input('idPeriodo')]);
         $dato['wasRecentlyCreated']= $dato->wasRecentlyCreated;
-        return response()->json($dato);
+        return $dato;
 }
 public function departamentos(){
     return DB::table('deptos')->get();
