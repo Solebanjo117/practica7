@@ -87,6 +87,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
                                         @if (Auth::user()->rol == 'Administrador')
+                                        <a class="dropdown-item" href="{{route('inscripcion.index')}}">Inscribir</a>
                                              <a class="dropdown-item" href="{{route('asignarGrupo.index')}}">Asignar Grupo</a>
                                       @endif
                                         @if (Auth::user()->rol == 'Maestro')
@@ -116,12 +117,11 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownId" >
                                     <div class="d-flex">
                                     <a class="dropdown-item" href="{{route('archivos.index')}}">Subir documentos</a>
+                                    @if (Auth::user()->rol == 'Administrador')
+
                                     <a class="dropdown-item" href="{{route('verArchivos')}}">Revisar documentos    </a>
                                     <a class="dropdown-item" href="{{route('materiasA.index')}}">Abrir materias</a>
-                                    <a class="dropdown-item" href="#">Material Didáctico </a>
-                                    <a class="dropdown-item" href="#">Docencia e Inv.</a>
-                                    <a class="dropdown-item" href="#">Asesoría Proyectos Ext.</a>
-                                    <a class="dropdown-item" href="#">Asesoría a S.S. </a>
+                                    @endif
                                 </div>
                             </div>
                             </li>

@@ -5,15 +5,49 @@ namespace App\Http\Controllers;
 use App\Models\Alumno;
 use App\Models\Carrera;
 use App\Models\Grupo;
+use App\Models\GrupoHorario;
 use App\Models\Inscripcion;
 use App\Models\Materia;
 use App\Models\Periodo;
+use App\Models\Personal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+use function Pest\Laravel\json;
+
 class JsonController extends Controller
 {
+    public function aggProf(Request $request){
+        Grupo::where('idGrupo',$request->input('idGrupo'))
+        ->update(['noTrabajador'=>$request->input('dato')]);
+        return response()->json(['mensaje'=>$request->input('dato')]);
+    }
+    public function aggMat(Request $request){
+        Grupo::where('idGrupo',$request->input('idGrupo'))
+        ->update(['idMateria'=>$request->input('dato')]);
+        return response()->json(['mensaje'=>$request->input('dato')]);
+    }
+    public function borrarHorario(Request $request){
+        $dato = GrupoHorario::where('idGrupo',$request->input('grupo'))->where('idLugar',$request->input('lugar'))
+        ->where('dia',$request->input('dia'))->where('hora',$request->input('hora'))->first();
+        GrupoHorario::find($dato->id)->delete();
+        return $dato;
+    }
+    public function horarios(){
+        return DB::table('grupo_horarios')->get();
+    }
+    public function insertHorario(Request $request){
+       $horario= GrupoHorario::create(['idGrupo'=>$request->input('grupo'),
+        'idLugar'=>$request->input('lugar'),'dia'=>$request->input('dia'),'hora'=>$request->input('hora')]);
+        return $horario;
+    }
+    public function personal(){
+ return Personal::all(); 
+    }
+    public function materias(){
+        return Materia::with('reticula')->get(); 
+           }
     public function periodos(){
         return Periodo::all();
     }
@@ -122,7 +156,22 @@ public function getHorarioAlumno($alumnoId)
     return response()->json($horarios, 200);
 }
 
-
-
+public function insOrUpdtGrpo(Request $request){
+ $dato= Grupo::updateOrCreate(['nombreGrupo' => $request->input('grupo')],
+        ['maxAlumnos'=> $request->input('max_alumnos'),'descripcionGrupo' => $request->input('desc'),
+        'idPeriodo'=>
+        $request->input('idPeriodo')]);
+        $dato['wasRecentlyCreated']= $dato->wasRecentlyCreated;
+        return $dato;
+}
+public function departamentos(){
+    return DB::table('deptos')->get();
+}
+public function edificios(){
+    return DB::table('edificios')->get();
+}
+public function lugares(){
+    return DB::table('lugars')->get();
+}
 
 }

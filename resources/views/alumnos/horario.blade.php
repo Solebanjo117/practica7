@@ -71,7 +71,7 @@
     function verificarCita(valor){
        let cita= document.getElementById('cita');
         let fechaActual = new Date();
-      //  fechaActual.setDate(fechaActual.getDate()+1);
+       fechaActual.setDate(fechaActual.getDate()+2);
         let fechaFormateada = fechaActual.toLocaleDateString('en-CA'); 
 
         let selectedOption = valor.options[valor.selectedIndex];
